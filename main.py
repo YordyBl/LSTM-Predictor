@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 import numpy as np
 import pandas as pd
@@ -61,6 +62,8 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Ejecuta la API
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Obtén el puerto de la variable de entorno PORT o usa 5000 por defecto
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
