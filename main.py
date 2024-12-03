@@ -20,7 +20,7 @@ historical_data['Date'] = pd.to_datetime(historical_data['Date'])
 historical_data.set_index('Date', inplace=True)
 historical_data = historical_data.sort_index(ascending=True)
 
-# No es necesario volver a escalar los datos aquí, porque ya has cargado el scaler previamente entrenado
+
 scaled_data = scaler.transform(historical_data[['Adj Close']].values)
 
 @app.route('/api/v1/predict', methods=['POST'])
@@ -41,7 +41,7 @@ def predict():
         days_to_predict = (future_date - last_date).days
 
         # Genera la predicción iterativa
-        last_sequence = scaled_data[-60:]  # Últimos 60 días normalizados
+        last_sequence = scaled_data[-60:] 
         future_predictions = []
 
         # Realiza la predicción
